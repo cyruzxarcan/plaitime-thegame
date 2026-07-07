@@ -294,24 +294,59 @@ function handleTilt(event){
         return;
 
 
-    // dead zone
-    if(
-        Math.abs(tilt)<3
-    ){
 
-        tiltValue = 0;
+    // Bigger dead zone
+    // Prevents shaking when holding phone normally
+
+    const deadZone = 8;
+
+
+
+    if(Math.abs(tilt) < deadZone){
+
+        tilt = 0;
 
     }
-    else{
+    else {
 
-        tiltValue = tilt / 15;
+        // remove dead zone area
+
+        tilt =
+        tilt > 0
+        ? tilt - deadZone
+        : tilt + deadZone;
 
     }
+
+
+
+    // Lower sensitivity
+
+    let targetTilt =
+    tilt / 35;
+
+
+
+    // Limit max movement
+
+    targetTilt =
+    Math.max(
+        -1,
+        Math.min(
+            1,
+            targetTilt
+        )
+    );
+
+
+
+    // Smooth acceleration
+
+    tiltValue +=
+    (targetTilt - tiltValue) * 0.12;
 
 
 }
-
-
 
 ////////////////////////////////////////////////////
 // GAME LOOP
@@ -738,7 +773,8 @@ function updatePlayer(){
 
 
     // Tilt control
-    movement += tiltValue * player.speed;
+    movement += tiltValue * (player.speed * 0.75);
+
 
 
 
