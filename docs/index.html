@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <title>PLAITIME</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="gameWrapper">
+
+    <!-- HOME SCREEN -->
+    <div id="homeScreen" class="screen active">
+
+        <div class="arcadeLogo">
+            🏆
+            <h1>PLAI:TIME</h1>
+        </div>
+
+        <p class="subtitle">
+            Tilt your phone<br>
+            Catch rewards<br>
+            Avoid bombs
+        </p>
+
+        <button id="startButton">
+            START GAME
+        </button>
+
+        <p class="instruction">
+            📱 Mobile: Tilt Control<br>
+            🖥 Desktop: Arrow Keys
+        </p>
+
+    </div>
+
+
+    <!-- GAME AREA -->
+
+    <canvas id="gameCanvas"></canvas>
+
+
+    <!-- HUD -->
+
+    <div id="hud">
+
+        <div class="hudBox">
+            SCORE:
+            <span id="score">
+                0
+            </span>
+        </div>
+
+
+        <div class="hudBox">
+            ❤️
+            <span id="lives">
+                3
+            </span>
+        </div>
+
+    </div>
+
+
+
+    <!-- GAME OVER SCREEN -->
+
+    <div id="gameOverScreen" class="screen">
+
+        <div class="gameOverBox">
+
+            <h2>
+                GAME OVER
+            </h2>
+
+
+            <div class="bomb">
+                💣
+            </div>
+
+
+            <p>
+                FINAL SCORE
+            </p>
+
+            <h3 id="finalScore">
+                0
+            </h3>
+
+
+            <button id="restartButton">
+                NEW GAME
+            </button>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
