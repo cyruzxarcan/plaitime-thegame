@@ -24,7 +24,9 @@ const scoreText = document.getElementById("score");
 const livesText = document.getElementById("lives");
 const finalScoreText = document.getElementById("finalScore");
 
-
+// Background
+const backgroundImage = new Image();
+backgroundImage.src = "images/background.png";
 
 ////////////////////////////////////////////////////
 // CANVAS RESPONSIVE SETUP
@@ -973,53 +975,45 @@ function drawPlayer() {
 
 function drawBackground(){
 
+    if(backgroundImage.complete){
 
-    // pixel arcade floor
+        const img = backgroundImage;
 
+        const scale = Math.max(
+            width / img.width,
+            height / img.height
+        );
 
-    ctx.fillStyle="#120022";
+        const drawWidth = img.width * scale;
+        const drawHeight = img.height * scale;
 
+        const offsetX = (width - drawWidth) / 2;
+        const offsetY = (height - drawHeight) / 2;
 
-    ctx.fillRect(
-        0,
-        0,
-        width,
-        height
-    );
+        ctx.drawImage(
+            img,
+            offsetX,
+            offsetY,
+            drawWidth,
+            drawHeight
+        );
 
+    }else{
 
+        // Fallback while image loads
 
-    ctx.strokeStyle=
-    "rgba(255,255,255,0.05)";
+        ctx.fillStyle = "#120022";
 
-
-    for(
-        let y=0;
-        y<height;
-        y+=40
-    ){
-
-        ctx.beginPath();
-
-        ctx.moveTo(
+        ctx.fillRect(
             0,
-            y
-        );
-
-        ctx.lineTo(
+            0,
             width,
-            y
+            height
         );
-
-        ctx.stroke();
 
     }
 
-
-
 }
-
-
 
 
 
