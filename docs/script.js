@@ -814,23 +814,71 @@ function updatePlayer(){
 ////////////////////////////////////////////////////
 
 
-function drawPlayer(){
+function drawPlayer() {
 
+    const x = player.x;
+    const y = player.y;
 
-    ctx.textAlign="center";
+    const portalRadius = 38;
 
-    ctx.textBaseline="middle";
+    ctx.save();
 
+    // Glow
+    ctx.shadowBlur = 25;
+    ctx.shadowColor = "#66f6ff";
 
-    ctx.font="85px Arial";
+    // Outer Ring
+    ctx.beginPath();
+    ctx.lineWidth = 6;
+    ctx.strokeStyle = "#66f6ff";
+    ctx.arc(x, y, portalRadius, 0, Math.PI * 2);
+    ctx.stroke();
 
+    // Middle Ring
+    ctx.beginPath();
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = "#a86cff";
+    ctx.arc(x, y, portalRadius - 8, 0, Math.PI * 2);
+    ctx.stroke();
 
-    ctx.fillText(
-        "🧺",
-        player.x,
-        player.y
+    // Inner Energy
+    const gradient = ctx.createRadialGradient(
+        x,
+        y,
+        5,
+        x,
+        y,
+        portalRadius - 12
     );
 
+    gradient.addColorStop(0, "#ffffff");
+    gradient.addColorStop(0.3, "#7ddcff");
+    gradient.addColorStop(1, "rgba(125,220,255,0)");
+
+    ctx.fillStyle = gradient;
+
+    ctx.beginPath();
+    ctx.arc(x, y, portalRadius - 10, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Bottom Capture Field
+    ctx.beginPath();
+    ctx.strokeStyle = "#7ddcff";
+    ctx.lineWidth = 3;
+
+    ctx.ellipse(
+        x,
+        y + 18,
+        portalRadius - 6,
+        8,
+        0,
+        0,
+        Math.PI
+    );
+
+    ctx.stroke();
+
+    ctx.restore();
 
 }
 
