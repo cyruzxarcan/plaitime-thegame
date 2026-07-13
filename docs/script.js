@@ -601,6 +601,14 @@ function drawObjects(){
 
 
 
+ctx.save();
+
+ctx.shadowColor = "rgba(0,0,0,0.8)";
+ctx.shadowBlur = 8;
+ctx.shadowOffsetX = 4;
+ctx.shadowOffsetY = 5;
+
+
 ctx.font =
 obj.size+"px Arial";
 
@@ -610,6 +618,8 @@ ctx.fillText(
     obj.y
 );
 
+
+ctx.restore();
     });
 
 }
