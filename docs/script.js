@@ -601,20 +601,26 @@ function drawObjects(){
 
 
 
-        ctx.font =
-        obj.size+"px Arial";
+ctx.save();
+
+ctx.shadowColor = "rgba(0,0,0,0.8)";
+ctx.shadowBlur = 8;
+ctx.shadowOffsetX = 4;
+ctx.shadowOffsetY = 5;
 
 
-
-        ctx.fillText(
-            emoji,
-            obj.x,
-            obj.y
-        );
+ctx.font =
+obj.size+"px Arial";
 
 
-    });
+ctx.fillText(
+    emoji,
+    obj.x,
+    obj.y
+);
 
+
+ctx.restore();
 
 
 }
