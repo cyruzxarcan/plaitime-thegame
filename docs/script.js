@@ -158,6 +158,8 @@ const player = {
 
 let tiltValue = 0;
 
+let targetTilt = 0;
+
 let touchX = null;
 
 let leftPressed = false;
@@ -286,28 +288,22 @@ function enableTilt(){
 
 function handleTilt(event){
 
-
     let tilt = event.gamma;
 
+    if (tilt === null) return;
 
-    if(tilt === null)
-        return;
+    // Larger dead zone
+    if (Math.abs(tilt) < 5) {
+        targetTilt = 0;
+    } else {
 
+        // Clamp the sensor
+        tilt = Math.max(-25, Math.min(25, tilt));
 
-    // dead zone
-    if(
-        Math.abs(tilt)<3
-    ){
-
-        tiltValue = 0;
-
-    }
-    else{
-
-        tiltValue = tilt / 15;
+        // Less sensitive
+        targetTilt = tilt / 20;
 
     }
-
 
 }
 
@@ -732,6 +728,7 @@ function checkCollision(){
 function updatePlayer(){
 
 
+    tiltValue += (targetTilt - tiltValue) * 0.15;
 
     let movement = 0;
 
